@@ -18,19 +18,27 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-PKG_NAME="libump"
-PKG_VERSION="ec06806"
+PKG_NAME="mame2003-plus"
+PKG_VERSION="270c968"
 PKG_REV="1"
 PKG_ARCH="any"
-PKG_LICENSE="Apache2"
-PKG_SITE="https://github.com/linux-sunxi/libump"
-PKG_URL="$LAKKA_MIRROR/$PKG_NAME-$PKG_VERSION.tar.xz"
-PKG_BUILD_DEPENDS_TARGET="toolchain"
+PKG_LICENSE="MAME"
+PKG_SITE="https://github.com/libretro/mame2003-plus-libretro"
+PKG_GIT_URL="$PKG_SITE"
+PKG_DEPENDS_TARGET="toolchain"
 PKG_PRIORITY="optional"
-PKG_SECTION="graphics"
-PKG_SHORTDESC="Unified Memory Provider userspace API source code needed for xf86-video-mali compilation"
-PKG_LONGDESC="Unified Memory Provider userspace API source code needed for xf86-video-mali compilation"
+PKG_SECTION="libretro"
+PKG_SHORTDESC="MAME - Multiple Arcade Machine Emulator"
+PKG_LONGDESC="MAME - Multiple Arcade Machine Emulator"
 
 PKG_IS_ADDON="no"
-PKG_AUTORECONF="yes"
+PKG_AUTORECONF="no"
 
+make_target() {
+  make ARCH="" CC="$CC" NATIVE_CC="$CC" LD="$CC"
+}
+
+makeinstall_target() {
+  mkdir -p $INSTALL/usr/lib/libretro
+  cp mame2003_plus_libretro.so $INSTALL/usr/lib/libretro/
+}
